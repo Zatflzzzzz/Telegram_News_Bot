@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    image: 'postgres:15'
+    container_name: third_lab_db
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: taasdasda
+      POSTGRES_DB: third_lab_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d third_lab_db" ]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+      timeout: 3s
+    restart: unless-stopped
